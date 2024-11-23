@@ -48,7 +48,7 @@ public class UserController {
             return "login";
         }
     }
-
+//test
     @GetMapping("/logged_in")
     public String loggedIn(HttpSession session, Model model) {
         // Henter "user" fra sessionen.
