@@ -26,7 +26,7 @@ public class TaskRepository implements ITaskRepository {
             statement.setString(1, task.getTaskName());
             statement.setDate(2, Date.valueOf(task.getStartdate())); // Konverter LocalDate til java.sql.Date
             statement.setDate(3, Date.valueOf(task.getEnddate()));
-            statement.setInt(4, task.getStatus().ordinal()); // Enum-værdi
+            statement.setInt(4, 4); // Enum værdi 'notstarted' default
             statement.setInt(5, task.getEmployeeId());
             statement.setInt(6, task.getEstimatedHours());
             statement.setInt(7, task.getSubprojectId());
@@ -55,8 +55,8 @@ public class TaskRepository implements ITaskRepository {
                     tasks.add(new Task(
                             resultSet.getInt("task_id"),
                             resultSet.getString("task_name"),
-                            resultSet.getDate("start_date") != null ? resultSet.getDate("start_date").toLocalDate() : null,
-                            resultSet.getDate("end_date") != null ? resultSet.getDate("end_date").toLocalDate() : null,
+                            resultSet.getDate("start_date").toLocalDate(),
+                            resultSet.getDate("end_date").toLocalDate(),
                             Status.valueOf(resultSet.getString("status").toUpperCase()),
                             resultSet.getInt("subproject_id"),
                             resultSet.getInt("estimated_hours"),
@@ -88,14 +88,13 @@ public class TaskRepository implements ITaskRepository {
                     taskList.add(new Task(
                             resultSet.getInt("task_id"),
                             resultSet.getString("task_name"),
-                            resultSet.getDate("start_date") != null ? resultSet.getDate("start_date").toLocalDate() : null,
-                            resultSet.getDate("end_date") != null ? resultSet.getDate("end_date").toLocalDate() : null,
+                            resultSet.getDate("start_date").toLocalDate(),
+                            resultSet.getDate("end_date").toLocalDate(),
                             Status.valueOf(resultSet.getString("status").toUpperCase()),
                             resultSet.getInt("subproject_id"),
                             resultSet.getInt("estimated_hours"),
                             resultSet.getInt("actual_hours"),
-                            resultSet.getObject("employee_id") != null ? resultSet.getInt("employee_id") : 0
-
+                            resultSet.getInt("employee_id")
                     ));
                 }
                 return taskList;

@@ -93,21 +93,25 @@ body {
     text-align: left;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
-    max-height: 400px; /* Sætter en maksimal højde på tabellen */
-    overflow-y: auto; /* Aktiverer vertikal rulle, hvis højden overskrides */
+    max-height: 200px; /* Sætter en maksimal højde på tabellen */
+    overflow-y: initial; /* Aktiverer vertikal rulle, hvis højden overskrides */
     flex-grow: 1;
+
 }
 
 .styled-table thead tr {
     background-color: #4A90E2;
     color: #ffffff;
     font-weight: bold;
+    border-radius: 10px; /* Rounded edges */
+
 }
 
 .styled-table th,
 .styled-table td {
     padding: 12px 15px;
     border: 1px solid #ddd;
+
 }
 
 .styled-table tbody tr {
@@ -215,6 +219,7 @@ button:hover,
     top: 0; /* Ensures it's positioned at the top of the page */
     left: 0; /* Optional: ensures it's aligned to the left edge of the page */
     z-index: 1000; /* Optional: ensures the header stays above other content */
+
 }
 
 .smaller-header{
@@ -223,6 +228,10 @@ button:hover,
     padding: 20px; /* Optional: Adds spacing inside the header */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow for better visual appeal */
     box-sizing: border-box; /* Ensures padding is included in the width calculation */
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
 }
 
 .homepage-header {

@@ -1,6 +1,6 @@
 package org.example.eksamenkea.model;
 
-public class ProjectEmployeeCostDTO {
+public class ProjectCostDTO {
     private int projectId;
     private String projectName;
     private double budget;
@@ -10,7 +10,7 @@ public class ProjectEmployeeCostDTO {
     private int employeeCost;
     private int estimatedTimeConsumption;
 
-    public ProjectEmployeeCostDTO(int projectId, String projectName, double budget, String projectDescription, int employeeId, int materialCost, int employeeCost, int estimatedTimeConsumption) {
+    public ProjectCostDTO(int projectId, String projectName, double budget, String projectDescription, int employeeId, int materialCost, int employeeCost, int estimatedTimeConsumption) {
         this.projectId = projectId;
         this.projectName = projectName;
         this.budget = budget;

@@ -2,7 +2,6 @@ package org.example.eksamenkea.controller;
 
 import org.example.eksamenkea.model.Employee;
 import org.example.eksamenkea.model.Project;
-import org.example.eksamenkea.model.ProjectEmployeeCostDTO;
 import org.example.eksamenkea.model.Role;
 import org.example.eksamenkea.service.ProjectService;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,7 +1,7 @@
 package org.example.eksamenkea.repository;
 
 import org.example.eksamenkea.model.Project;
-import org.example.eksamenkea.model.ProjectEmployeeCostDTO;
+import org.example.eksamenkea.model.ProjectCostDTO;
 import org.example.eksamenkea.repository.interfaces.IProjectRepository;
 import org.example.eksamenkea.service.Errorhandling;
 import org.example.eksamenkea.util.ConnectionManager;
@@ -89,8 +89,8 @@ public class ProjectRepository implements IProjectRepository {
     }
 
     @Override //Zuhur
-    public List<ProjectEmployeeCostDTO> getArchivedProjects(int employeeId) throws Errorhandling {
-        List<ProjectEmployeeCostDTO> projects = new ArrayList<>();
+    public List<ProjectCostDTO> getArchivedProjects(int employeeId) throws Errorhandling {
+        List<ProjectCostDTO> projects = new ArrayList<>();
         String queryView = "SELECT project.*,SUM(task.actual_hours * employee.employee_rate) AS employee_cost FROM project " +
                 "LEFT JOIN subproject ON project.project_id = subproject.project_id " +
                 "LEFT JOIN task ON subproject.subproject_id = task.subproject_id " +
@@ -106,7 +106,7 @@ public class ProjectRepository implements IProjectRepository {
                 int projectId = resultSet.getInt("project_id");
                 int totalTime = calculateTimeConsumptionProject(connection,projectId);
 
-                projects.add(new ProjectEmployeeCostDTO(
+                projects.add(new ProjectCostDTO(
                         projectId,
                         resultSet.getString("project_name"),
                         resultSet.getDouble("budget"),
@@ -166,8 +166,8 @@ public class ProjectRepository implements IProjectRepository {
 
 
     @Override
-    public List<ProjectEmployeeCostDTO> getProjectsDTOByEmployeeId(int employeeId) throws Errorhandling {
-        List<ProjectEmployeeCostDTO> projects = new ArrayList<>();
+    public List<ProjectCostDTO> getProjectsDTOByEmployeeId(int employeeId) throws Errorhandling {
+        List<ProjectCostDTO> projects = new ArrayList<>();
         String queryView =
                 "SELECT project.project_id, project.project_name, project.budget, project.project_description, " +
                         "project.employee_id, project.material_cost, " +
@@ -183,14 +183,14 @@ public class ProjectRepository implements IProjectRepository {
              PreparedStatement preparedStatement = connection.prepareStatement(queryView)) {
             preparedStatement.setInt(1, employeeId);
 
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+            ResultSet resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
                     int projectId = resultSet.getInt("project_id");
 
                     // Brug den eksisterende forbindelse til at beregne tid
                     int totalTime = calculateTimeConsumptionProject(connection, projectId);
 
-                    projects.add(new ProjectEmployeeCostDTO(
+                    projects.add(new ProjectCostDTO(
                             projectId,
                             resultSet.getString("project_name"),
                             resultSet.getDouble("budget"),
@@ -201,7 +201,7 @@ public class ProjectRepository implements IProjectRepository {
                             totalTime // Tilføj samlet tid
                     ));
                 }
-            }
+
         } catch (SQLException e) {
             throw new Errorhandling("Failed to get projects by employee ID: " + e.getMessage());
         }

@@ -20,7 +20,7 @@ public class ProjectController {
     @GetMapping("/project-leader-overview")//Zuhur
     public String showProjectLeaderOverview(HttpSession session, Model model) throws Errorhandling {
         Employee employee = (Employee) session.getAttribute("employee");
-        List<ProjectEmployeeCostDTO> projects = projectService.getProjectsDTOByEmployeeId(employee.getEmployeeId());
+        List<ProjectCostDTO> projects = projectService.getProjectsDTOByEmployeeId(employee.getEmployeeId());
         model.addAttribute("projects", projects);
         return "project-leader-overview";
     }
@@ -58,7 +58,7 @@ public class ProjectController {
     @GetMapping("/archived-project-overview") //Zuhur
     public String showArchivedProjects(HttpSession session, Model model) throws Errorhandling {
         Employee employee = (Employee) session.getAttribute("employee");
-        List<ProjectEmployeeCostDTO> archivedProjects = projectService.getArchivedProjects(employee.getEmployeeId());
+        List<ProjectCostDTO> archivedProjects = projectService.getArchivedProjects(employee.getEmployeeId());
         model.addAttribute("archivedProjects", archivedProjects);
         return "archived-project-overview";
     }
@@ -67,7 +67,7 @@ public class ProjectController {
     public String archiveProjectOverview(@RequestParam("projectId") int projectId, HttpSession session, Model model) throws Errorhandling {
         Employee employee = (Employee) session.getAttribute("employee");
         projectService.archiveProject(projectId);
-        List<ProjectEmployeeCostDTO> projects = projectService.getProjectsDTOByEmployeeId(employee.getEmployeeId());
+        List<ProjectCostDTO> projects = projectService.getProjectsDTOByEmployeeId(employee.getEmployeeId());
         model.addAttribute("projects", projects);
 
         return "project-leader-overview";

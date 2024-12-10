@@ -1,6 +1,6 @@
 package org.example.eksamenkea.service;
 import org.example.eksamenkea.model.Project;
-import org.example.eksamenkea.model.ProjectEmployeeCostDTO;
+import org.example.eksamenkea.model.ProjectCostDTO;
 import org.example.eksamenkea.repository.interfaces.IProjectRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
@@ -23,7 +23,7 @@ public class ProjectService {
         iProjectRepository.archiveProject(projectId);
     }
 
-    public List<ProjectEmployeeCostDTO> getArchivedProjects(int employeeId) throws Errorhandling {
+    public List<ProjectCostDTO> getArchivedProjects(int employeeId) throws Errorhandling {
         return iProjectRepository.getArchivedProjects(employeeId);
     }
 
@@ -35,7 +35,7 @@ public class ProjectService {
         iProjectRepository.updateProject(project);
     }
 
-    public List<ProjectEmployeeCostDTO> getProjectsDTOByEmployeeId(int employeeId) throws Errorhandling {
+    public List<ProjectCostDTO> getProjectsDTOByEmployeeId(int employeeId) throws Errorhandling {
         return iProjectRepository.getProjectsDTOByEmployeeId(employeeId);
     }
 

@@ -54,7 +54,7 @@
         <!-- Hidden Fields -->
         <input type="hidden" name="subprojectId" th:value="${subprojectId}" />
         <input type="hidden" name="employeeId" th:value="${employeeId}" />
-        <input type="hidden" th:field="*{status}" value="NOTSTARTED" />
+        <input type="hidden" th:field="*{status}" th:value="NOTSTARTED" />
         <input type="hidden" name="subprojectName" th:value="${subprojectName}" />
 
         <!-- Submit Button -->

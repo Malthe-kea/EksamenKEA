@@ -60,6 +60,7 @@ public class TaskController {
 
         return "project-leader-task-overview";
     }
+
     @GetMapping("/worker-overview") //Malthe
     public String showWorkerOverview(HttpSession session, Model model) throws Errorhandling {
         Employee employee = (Employee) session.getAttribute("employee");
@@ -77,36 +78,21 @@ public class TaskController {
 
     @PostMapping("/task-status") //Amalie
     public String updatedTask(@ModelAttribute Task task) throws Errorhandling {
-        System.out.println("Received task: " + task);
-        System.out.println("Received Actual Hours: " + task.getActualHours());
         taskService.updateTask(task);
         return "redirect:/worker-overview";
     }
 
     @PostMapping("/assign-worker") //Malthe
-    public String assignEmployeeToTask(@RequestParam("subprojectId") int subprojectId,
-                                       @RequestParam("taskId") int taskId, @RequestParam("employeeEmail") String employeeEmail, Model model, HttpSession session) throws Errorhandling {
+    public String assignEmployeeToTask(@RequestParam("subprojectId") int subprojectId,@RequestParam("taskId") int taskId, @RequestParam("employeeEmail") String employeeEmail, Model model, HttpSession session) throws Errorhandling {
         Employee employee = employeeService.getEmployeeByEmail(employeeEmail);
         employee.setEmployeeId(employee.getEmployeeId());
-        Task task1 = taskService.getTaskByTaskId(taskId);
-        int taskHours = task1.getEstimatedHours();
-        List<Task> tasklist = taskService.getTasklistByEmployeeId(employee.getEmployeeId());
-        int totalTaskHours = 0;
-
-        for (Task task : tasklist) {
-            totalTaskHours += task.getEstimatedHours();
-        }
 
         model.addAttribute("subprojectId", subprojectId);
         model.addAttribute("taskId", taskId);
-        model.addAttribute("totalTaskHours", totalTaskHours);
         model.addAttribute("employee", employee);
 
-        if ((totalTaskHours + taskHours) <= employee.getMaxHours()) {
-            taskService.assignWorkerToTask(taskId, employee.getEmployeeId());
-        } else {
-            return "error/error-exceed-max-hours-for-worker";
-        }
+        taskService.assignWorkerToTask(taskId, employee.getEmployeeId());
+
         return "redirect:/project-leader-tasks?subprojectId=" + subprojectId;
 
     }

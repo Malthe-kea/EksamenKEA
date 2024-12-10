@@ -1,6 +1,6 @@
 package org.example.eksamenkea.service;
 import org.example.eksamenkea.model.Project;
-import org.example.eksamenkea.model.ProjectEmployeeCostDTO;
+import org.example.eksamenkea.model.ProjectCostDTO;
 import org.example.eksamenkea.repository.interfaces.IProjectRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,7 +27,7 @@ class ProjectServiceTest {
     private ProjectService projectService; // Inject mocks
 
     private Project project;
-    private ProjectEmployeeCostDTO projectEmployeeCostDTO;
+    private ProjectCostDTO projectCostDTO;
 
     @BeforeEach
     void setup() {
@@ -39,7 +39,7 @@ class ProjectServiceTest {
 
         // Sample project for tests
         project = new Project(1, "testproject", 200, "testdescription", 1, 200);
-        projectEmployeeCostDTO = new ProjectEmployeeCostDTO(1, "testproject", 200, "testdescription", 1, 200, 100, 100);
+        projectCostDTO = new ProjectCostDTO(1, "testproject", 200, "testdescription", 1, 200, 100, 100);
     }
 
     @Test
@@ -99,8 +99,8 @@ class ProjectServiceTest {
 
         // Assert
         verify(iProjectRepository).getProjectsDTOByEmployeeId(1);
-        assertNotNull(projectEmployeeCostDTO);
-        assertEquals("testproject", projectEmployeeCostDTO.getProjectName());
-        assertEquals(200, projectEmployeeCostDTO.getBudget());
+        assertNotNull(projectCostDTO);
+        assertEquals("testproject", projectCostDTO.getProjectName());
+        assertEquals(200, projectCostDTO.getBudget());
     }
 }

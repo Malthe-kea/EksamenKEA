@@ -22,6 +22,7 @@
                     <th>Budget</th>
                     <th>Material Cost</th>
                     <th>Employee Cost</th>
+
                 </tr>
                 </thead>
                 <tbody>
@@ -36,6 +37,7 @@
                     <td th:text="${#numbers.formatDecimal(project.budget, 0,0) + ' kr'}"></td>
                     <td th:text="${project.materialCost}"></td>
                     <td th:text="${project.employeeCost}"></td>
+
                 </tr>
                 </tbody>
             </table>

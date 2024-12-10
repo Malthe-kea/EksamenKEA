@@ -29,8 +29,6 @@ public class SubprojectService {
         return iSubprojectRepository.getSubjectsByProjectId(projectId);
     }
 
-    public int calculateTimeConsumptionSubproject(int subprojectId) throws Errorhandling {
-        return iSubprojectRepository.calculateTimeConsumptionSubproject(subprojectId);
-    }
+
 
 }
