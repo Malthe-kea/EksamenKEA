@@ -12,8 +12,8 @@ body {
     background: url('pictures/login-screen.jpg') no-repeat center center fixed;
     background-size: cover;
     display: flex;
-    align-items: center;
     justify-content: center;
+    overflow: auto; /* Tillader scrolling af indholdet */
 }
 
 /* Login container */
@@ -88,11 +88,14 @@ body {
     width: 100%;
     border-collapse: collapse;
     margin: 20px 0;
+    margin-top: 130px; /* Skaber afstand under headeren */
     font-size: 16px;
     text-align: left;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
-    overflow: hidden;
+    max-height: 400px; /* Sætter en maksimal højde på tabellen */
+    overflow-y: auto; /* Aktiverer vertikal rulle, hvis højden overskrides */
+    flex-grow: 1;
 }
 
 .styled-table thead tr {
@@ -205,6 +208,13 @@ button:hover,
     border-radius: 10px; /* Rounded edges */
     padding: 20px; /* Optional: Adds spacing inside the header */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow for better visual appeal */
+    box-sizing: border-box; /* Ensures padding is included in the width calculation */
+    overflow: hidden; /* Prevents overflow if there is too much content */
+    width: 100%;
+    position: fixed; /* Fixes the header at the top */
+    top: 0; /* Ensures it's positioned at the top of the page */
+    left: 0; /* Optional: ensures it's aligned to the left edge of the page */
+    z-index: 1000; /* Optional: ensures the header stays above other content */
 }
 
 .homepage-header {
@@ -231,6 +241,7 @@ button:hover,
     display: inline-block;
     text-align: center;
     margin: 20px auto;
+    width: 100%;
 }
 
 .logo {

@@ -18,10 +18,16 @@ public class Project {
         this.materialCost = materialCost;
     }
 
-    public Project() {
+    public Project(String projectName, double budget, String projectDescription, int employeeId, int materialCost) {
+        this.projectName = projectName;
+        this.budget = budget;
+        this.projectDescription = projectDescription;
+        this.employeeId = employeeId;
+        this.materialCost = materialCost;
+    }
+    public Project(){
 
     }
-
     public int getProjectId() {
         return projectId;
     }
