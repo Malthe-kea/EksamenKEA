@@ -33,7 +33,7 @@
                 <tr th:each="project : ${archivedProjects}">
                     <td th:text="${project.projectName}"></td>
                     <td th:text="${project.projectDescription}"></td>
-                    <td th:text="${project.budget}"></td>
+                    <td th:text="${#numbers.formatDecimal(project.budget, 0,0) + ' kr'}"></td>
                     <td th:text="${project.materialCost}"></td>
                     <td th:text="${project.employeeCost}"></td>
                 </tr>
